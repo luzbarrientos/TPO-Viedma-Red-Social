@@ -33,7 +33,7 @@ public class PruebasMergeSort {
         correctas = 0;
         fallidas = 0;
 
-        System.out.println("\n=== PRUEBAS MERGE SORT ===");
+        System.out.println("\n- PRUEBAS MERGE SORT -");
 
         Publicacion[] publicaciones = {
                 new Publicacion(1, "Paz",

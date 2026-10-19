@@ -26,7 +26,7 @@ public class PruebasDijkstra {
         correctas = 0;
         fallidas = 0;
 
-        System.out.println("\n=== PRUEBAS DIJKSTRA ===");
+        System.out.println("\n- PRUEBAS DIJKSTRA -");
 
         Map<String, List<Vinculo>> red = DatosEjemplo.red();
 

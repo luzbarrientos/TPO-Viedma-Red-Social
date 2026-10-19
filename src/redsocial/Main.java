@@ -15,7 +15,7 @@ public class Main {
         int opcion;
 
         do {
-            System.out.println("\n=== RED SOCIAL UNIVERSITARIA ===");
+            System.out.println("\n- RED SOCIAL UNIVERSITARIA -");
             System.out.println("1. Ordenar publicaciones por fecha");
             System.out.println("2. Ordenar publicaciones por relevancia");
             System.out.println("3. Buscar cadena de difusion");

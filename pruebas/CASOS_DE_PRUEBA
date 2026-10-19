@@ -1,0 +1,203 @@
+CASOS DE PRUEBA - TPO PROGRAMACION III
+Proyecto: Red Social Universitaria para la Colaboracion
+Etapa: Primera entrega
+Lenguaje: Java 21 (Temurin)
+Entorno: IntelliJ IDEA
+Resultado general: 18 pruebas correctas, 0 fallidas.
+
+---
+1. OBJETIVO
+---
+Verificar las tres funcionalidades de la primera entrega:
+- Merge Sort: ordenamiento de publicaciones por fecha o relevancia.
+- Dijkstra: busqueda de la cadena de difusion de menor tiempo.
+- Mochila 0/1: seleccion de iniciativas con maximo impacto
+  sin superar el presupuesto.
+
+Las pruebas contemplan situaciones normales, empates,
+casos limite y entradas invalidas.
+
+---
+2. METODOLOGIA
+---
+Las pruebas se implementaron en el paquete redsocial.pruebas:
+- PruebasMergeSort.java: 6 casos.
+- PruebasMochila.java: 6 casos.
+- PruebasDijkstra.java: 6 casos.
+
+EjecutarPruebas.java ejecuta las 18 pruebas juntas.
+Cada caso compara el resultado del algoritmo con el esperado.
+[OK] significa que la comprobacion paso.
+[ERROR] significa que la comprobacion fallo.
+
+---
+3. PRUEBAS DE MERGE SORT (CP01 A CP06)
+---
+Algoritmo: Merge Sort.
+Estrategia: Divide y Conquista.
+Clase: PruebasMergeSort.java.
+
+Datos de prueba:
+- ID 1: 10/10/2026, 45 reacciones, 15 comentarios,
+  relevancia 60.
+- ID 2: 12/10/2026, 20 reacciones, 5 comentarios,
+  relevancia 25.
+- ID 4: 11/10/2026, 15 reacciones, 10 comentarios,
+  relevancia 25.
+- ID 5: 09/10/2026, 10 reacciones, 5 comentarios,
+  relevancia 15.
+
+La relevancia se definio en el proyecto como la suma de
+reacciones y comentarios.
+
+CP01 - Ordenamiento por fecha descendente.
+Esperado: IDs 2, 4, 1, 5.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP02 - Ordenamiento por relevancia descendente.
+Esperado: IDs 1, 2, 4, 5.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP03 - Empate de relevancia y fecha.
+Esperado: IDs 3, 8 (menor ID primero).
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP04 - Arreglo vacio.
+Esperado: arreglo vacio.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP05 - Una sola publicacion.
+Esperado: ID 1.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP06 - Conservacion del arreglo original.
+Esperado: IDs originales 1, 2, 4, 5.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+Resumen Merge Sort: 6 correctas, 0 fallidas.
+
+---
+4. PRUEBAS DE MOCHILA 0/1 (CP07 A CP12)
+---
+Algoritmo: Mochila 0/1.
+Estrategia: Programacion Dinamica.
+Clase: PruebasMochila.java.
+
+Datos de prueba:
+- Iniciativa 1: costo 4, impacto 7.
+- Iniciativa 2: costo 5, impacto 9.
+- Iniciativa 3: costo 3, impacto 6.
+- Iniciativa 4: costo 2, impacto 4.
+
+Cada iniciativa puede elegirse como maximo una vez.
+
+CP07 - Presupuesto 9.
+Esperado: iniciativas 1, 3 y 4; costo 9; impacto 17.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP08 - Presupuesto 2.
+Esperado: iniciativa 4; costo 2; impacto 4.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP09 - Presupuesto 0.
+Esperado: ninguna iniciativa; costo 0; impacto 0.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP10 - Presupuesto 14.
+Esperado: todas las iniciativas; costo 14; impacto 26.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP11 - Lista vacia de iniciativas.
+Esperado: ninguna iniciativa; costo 0; impacto 0.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP12 - Presupuesto negativo.
+Esperado: rechazo mediante IllegalArgumentException.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+Resumen Mochila: 6 correctas, 0 fallidas.
+
+---
+5. PRUEBAS DE DIJKSTRA (CP13 A CP18)
+---
+Algoritmo: Dijkstra.
+Estrategia: Greedy.
+Clase: PruebasDijkstra.java.
+
+Se utiliza la red dirigida de DatosEjemplo, con tiempos
+positivos expresados en minutos.
+
+CP13 - Camino minimo desde Ana hasta Eva.
+Esperado: Ana -> Caro -> Beto -> Dani -> Eva;
+          tiempo total 11 minutos.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP14 - Camino desde Eva hasta Ana.
+Esperado: destino inalcanzable; camino vacio.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP15 - Origen y destino iguales.
+Esperado: Ana; tiempo total 0 minutos.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP16 - Usuario inexistente.
+Esperado: rechazo mediante IllegalArgumentException.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP17 - Camino indirecto mas rapido desde Ana hasta Beto.
+Esperado: Ana -> Caro -> Beto; tiempo total 3 minutos.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP18 - Registro de decisiones.
+Esperado: lista de decisiones no vacia.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+Resumen Dijkstra: 6 correctas, 0 fallidas.
+
+---
+6. RESULTADOS GENERALES
+---
+Entorno: IntelliJ IDEA, Java 21 (Temurin).
+Clase ejecutada: EjecutarPruebas.java.
+
+Merge Sort: 6 realizadas, 6 correctas, 0 fallidas.
+Mochila 0/1: 6 realizadas, 6 correctas, 0 fallidas.
+Dijkstra: 6 realizadas, 6 correctas, 0 fallidas.
+
+TOTAL: 18 REALIZADAS, 18 CORRECTAS, 0 FALLIDAS.
+Porcentaje de casos aprobados: 100 %.
+
+Salida final observada en consola:
+
+- RESUMEN GENERAL -
+Merge Sort: CORRECTO
+Mochila: CORRECTO
+Dijkstra: CORRECTO
+RESULTADO: 18/18 PRUEBAS CORRECTAS
+Process finished with exit code 0
+
+---
+7. EVIDENCIAS
+---
+Las capturas de la consola de IntelliJ muestran:
+- resultado_pruebas_1.png: CP01 a CP12 (Merge Sort y Mochila).
+- resultado_pruebas_2.png: CP13 a CP18 (Dijkstra) y
+  resumen general.
+
+Estos nombres corresponden a las capturas que deben
+conservarse junto a este documento en la carpeta pruebas.
+
+---
+8. CONCLUSION
+---
+Las 18 comprobaciones ejecutadas finalizaron correctamente.
+Merge Sort supero los escenarios de ordenamiento y desempate.
+Mochila 0/1 supero los escenarios de optimizacion y limites
+del presupuesto. Dijkstra supero los escenarios de camino
+minimo, inalcanzabilidad y registro de decisiones.
+
+Los resultados observados coinciden con los esperados en
+los 18 casos definidos. No se detectaron fallas en estas
+pruebas. Esto no garantiza la ausencia de errores en otros
+escenarios, pero aporta evidencia del funcionamiento de
+las tres funcionalidades implementadas.
