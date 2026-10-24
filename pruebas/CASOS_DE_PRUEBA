@@ -181,6 +181,7 @@ Process finished with exit code 0
 ---
 Las capturas de la consola de IntelliJ muestran:
 - resultado_pruebas_1.png: CP01 a CP12 (Merge Sort y Mochila).
+
 - resultado_pruebas_2.png: CP13 a CP18 (Dijkstra) y
   resumen general.
 
