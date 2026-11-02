@@ -16,10 +16,10 @@ public class PruebasSeleccionActividades {
     private static void verificar(String nombre, boolean condicion) {
         if (condicion) {
             correctas++;
-            System.out.println("[OK] " + nombre);
+            System.out.println("[Ok] " + nombre);
         } else {
             fallidas++;
-            System.out.println("[ERROR] " + nombre);
+            System.out.println("[Error] " + nombre);
         }
     }
 
