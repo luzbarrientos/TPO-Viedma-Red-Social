@@ -1,4 +1,4 @@
-package interfaz;
+package redsocial.interfaz;
 
 public class PanelFuncionalidadesExtra {
 }
