@@ -1,180 +1,243 @@
-# TPO Programación III — Red Social Universitaria
+# Red Social Universitaria
 
-## 1. Descripción del proyecto
+**Trabajo Práctico Obligatorio — Programación III**
 
-Aplicación desarrollada en Java para el Trabajo Práctico Obligatorio de Programación III.
+Aplicación desarrollada en Java para resolver problemas de colaboración entre estudiantes universitarios mediante estrategias de diseño y análisis de algoritmos.
 
-El proyecto consiste en una red social universitaria orientada a la colaboración entre estudiantes, que permite organizar publicaciones, encontrar cadenas de difusión entre usuarios y seleccionar iniciativas para financiar.
+El proyecto integra seis funcionalidades, una interfaz gráfica desarrollada con Java Swing y pruebas automatizadas.
 
-Se implementaron tres funcionalidades utilizando diferentes estrategias de diseño y análisis de algoritmos.
+---
 
-## 2. Integrantes — Grupo Viedma
+## Integrantes
 
 - Luz Barrientos
 - Germán Rocha Sánchez
 - Martina Córdoba
 
-## 3. Tecnologías utilizadas
+---
 
-- Java 21 (Temurin).
-- IntelliJ IDEA.
-- Git y GitHub para control de versiones.
-- Aplicación de consola.
+## Descripción del proyecto
 
-No se requieren bibliotecas externas.
+La Red Social Universitaria es una aplicación que simula situaciones de interacción y colaboración dentro de una comunidad académica.
 
-## 4. Funcionalidades implementadas
+Permite organizar publicaciones, encontrar conexiones entre usuarios, seleccionar iniciativas, planificar actividades, formar equipos y buscar cadenas alternativas de difusión.
 
-### Funcionalidad 1 — Ordenamiento de publicaciones
+Cada funcionalidad utiliza una estrategia algorítmica adecuada a las características del problema.
 
-**Algoritmo:** Merge Sort.
+---
 
-**Estrategia:** Divide y Conquista.
+## Algoritmos implementados
 
-Permite ordenar publicaciones de dos maneras:
+### 1. Ordenamiento de publicaciones
 
-- Por fecha, desde la más reciente hasta la más antigua.
-- Por relevancia, desde la más relevante hasta la menos relevante.
+**Algoritmo:** Merge Sort  
+**Estrategia:** Divide y Vencerás  
+**Complejidad temporal:** O(n log n)
 
-La relevancia se calcula como la suma de reacciones y comentarios.
+Permite ordenar publicaciones según criterios como fecha y relevancia.
 
-En caso de empate, se prioriza la publicación más reciente y luego el identificador menor.
+### 2. Camino más corto entre usuarios
 
-**Complejidad temporal:** O(n log n).
+**Algoritmo:** Dijkstra  
+**Estrategia:** Greedy
 
-### Funcionalidad 2 — Cadena de difusión más rápida
+Permite encontrar el camino de menor tiempo entre dos usuarios de la red social.
 
-**Algoritmo:** Dijkstra.
+Utiliza una cola de prioridad y considera vínculos dirigidos con tiempos positivos.
 
-**Estrategia:** Greedy.
+### 3. Selección de iniciativas
 
-Permite encontrar el camino de menor tiempo entre dos usuarios de una red de contactos dirigida y ponderada.
+**Algoritmo:** Mochila 0/1  
+**Estrategia:** Programación Dinámica
 
-El sistema muestra el recorrido, el tiempo total y las decisiones realizadas durante la búsqueda.
+Selecciona iniciativas universitarias buscando maximizar el impacto total sin superar un presupuesto establecido.
 
-También identifica cuando el destino es inalcanzable.
+Cada iniciativa puede ser seleccionada como máximo una vez.
 
-**Complejidad temporal:** O((V + E) log V).
+### 4. Selección de actividades compatibles (A3)
 
-### Funcionalidad 3 — Selección de iniciativas
+**Algoritmo:** Selección ponderada de intervalos  
+**Estrategia:** Programación Dinámica
 
-**Algoritmo:** Mochila 0/1.
+Permite elegir actividades que no se superpongan y que maximicen el interés total.
 
-**Estrategia:** Programación Dinámica.
+La interfaz gráfica permite:
 
-Permite seleccionar iniciativas universitarias que maximicen el impacto total sin superar un presupuesto disponible.
+- Agregar actividades.
+- Editar actividades existentes.
+- Eliminar actividades.
+- Restaurar los datos originales.
+- Calcular la selección óptima.
 
-Cada iniciativa puede financiarse como máximo una vez.
+### 5. Formación de equipos (B1)
 
-El programa informa las iniciativas seleccionadas, el costo total, el impacto obtenido y el presupuesto restante.
+**Algoritmo:** Backtracking
 
-**Complejidad temporal:** O(n × P).
+Genera combinaciones válidas de estudiantes respetando las siguientes restricciones:
 
-## 5. Estructura del proyecto
+- Tamaño del equipo.
+- Habilidades requeridas.
+- Integrantes obligatorios.
+- Incompatibilidades entre estudiantes.
 
-El código se organiza en los siguientes paquetes:
+Utiliza podas para evitar explorar combinaciones que no pueden completar un equipo válido.
 
-**`redsocial.modelo`**
+### 6. Cadenas alternativas de difusión (B3)
 
-Contiene las clases que representan los datos:
+**Algoritmo:** Backtracking
 
-- `Publicacion.java`
-- `Vinculo.java`
-- `Iniciativa.java`
+Busca cadenas de difusión entre un usuario de origen y otro de destino.
 
-**`redsocial.algoritmos`**
+Considera:
 
-Contiene las implementaciones de los algoritmos:
+- Tiempo máximo permitido.
+- Cantidad máxima de intermediarios.
+- Usuarios excluidos.
+- Prohibición de repetir usuarios en una misma cadena.
 
-- `MergeSortPublicaciones.java`
-- `Dijkstra.java`
-- `Mochila.java`
+Además, identifica la cadena válida de menor tiempo total.
 
-**`redsocial.datos`**
+---
 
-Contiene los datos utilizados para demostrar el funcionamiento:
+## Interfaz gráfica
 
-- `DatosEjemplo.java`
+La aplicación cuenta con una interfaz desarrollada mediante **Java Swing**, organizada en seis pestañas:
 
-**`redsocial.pruebas`**
+1. Publicaciones.
+2. Contactos.
+3. Iniciativas.
+4. Actividades.
+5. Equipos.
+6. Difusión.
 
-Contiene las pruebas automatizadas:
+Cada pestaña permite ejecutar la funcionalidad correspondiente y visualizar sus resultados.
 
-- `PruebasMergeSort.java`
-- `PruebasDijkstra.java`
-- `PruebasMochila.java`
-- `EjecutarPruebas.java`
+---
 
-**`redsocial.Main`**
+## Tecnologías utilizadas
 
-Contiene el menú principal de la aplicación.
+- **Java 21:** lenguaje de programación.
+- **Java Swing:** desarrollo de la interfaz gráfica.
+- **IntelliJ IDEA:** entorno de desarrollo.
+- **Git:** control de versiones.
+- **GitHub:** almacenamiento del repositorio y trabajo colaborativo.
 
-## 6. Cómo ejecutar el programa
+---
 
-1. Abrir el proyecto en IntelliJ IDEA.
-2. Configurar Java 21 como SDK del proyecto.
-3. Abrir `src/redsocial/Main.java`.
-4. Ejecutar el método `main` presionando Run.
-5. Seleccionar una funcionalidad desde el menú de consola.
+## Estructura del proyecto
 
-El programa permite consultar las funcionalidades utilizando los datos de ejemplo incluidos en el proyecto.
+El proyecto está organizado en los siguientes paquetes:
 
-## 7. Ejecución de pruebas
+- **redsocial.modelo:** clases que representan las entidades del sistema.
+- **redsocial.datos:** datos de ejemplo utilizados por los algoritmos.
+- **redsocial.algoritmos:** implementación de las seis funcionalidades.
+- **redsocial.interfaz:** ventana principal y paneles gráficos.
+- **redsocial.pruebas:** pruebas automatizadas y ejecutor general.
 
-Se implementaron 18 casos de prueba automatizados, distribuidos de la siguiente manera:
+### Clases principales de algoritmos
 
-- Merge Sort: 6 casos.
-- Mochila 0/1: 6 casos.
-- Dijkstra: 6 casos.
+- MergeSortPublicaciones.java
+- Dijkstra.java
+- Mochila.java
+- SeleccionActividades.java
+- FormacionEquipos.java
+- CadenasDifusion.java
 
-Para ejecutarlos:
+### Clases principales de la interfaz
 
-1. Abrir `src/redsocial/pruebas/EjecutarPruebas.java`.
-2. Presionar Run en IntelliJ IDEA.
-3. Revisar los resultados de cada prueba en la consola.
+- MainGUI.java
+- VentanaPrincipal.java
+- PanelFuncionalidades.java
+- PanelFuncionalidadesExtra.java
 
-**Resultado verificado: 18 pruebas correctas y 0 fallidas.**
+---
 
-La documentación se encuentra en:
+## Cómo ejecutar el proyecto
 
-`pruebas/CASOS_DE_PRUEBA`
+### Requisitos
 
-Las capturas de ejecución se encuentran en:
+- Tener instalado Java JDK 21.
+- Contar con IntelliJ IDEA u otro entorno compatible con Java.
 
-- `pruebas/resultado_pruebas_1.jpeg`
-- `pruebas/resultado_pruebas_2.jpeg`
+### Ejecutar la aplicación gráfica
 
-## 8. Funcionalidades previstas para la segunda entrega
+1. Clonar o descargar el repositorio.
+2. Abrir el proyecto en IntelliJ IDEA.
+3. Configurar el JDK 21.
+4. Abrir la clase `redsocial.interfaz.MainGUI`.
+5. Ejecutar su método `main`.
 
-Se seleccionaron las siguientes funcionalidades para desarrollar posteriormente:
+Se abrirá la ventana principal con las seis funcionalidades.
 
-**A3 — Selección de actividades compatibles**
+### Ejecutar las pruebas automatizadas
 
-Se utilizará Programación Dinámica para seleccionar actividades sin superposiciones y maximizar el interés total.
+1. Abrir la clase `redsocial.pruebas.EjecutarPruebas`.
+2. Ejecutar su método `main`.
+3. Consultar los resultados en la consola.
 
-**B1 — Formación de equipos con restricciones**
+El proyecto también conserva la clase `redsocial.Main` para la ejecución por consola.
 
-Se utilizará Backtracking para generar equipos que cumplan las restricciones establecidas.
+---
 
-**B3 — Cadenas alternativas de difusión**
+## Pruebas realizadas
 
-Se utilizará Backtracking para encontrar cadenas de difusión válidas bajo diferentes restricciones.
+Se desarrollaron pruebas automatizadas para verificar el funcionamiento de los algoritmos y sus restricciones.
 
-Estas funcionalidades están planificadas, pero no forman parte de la implementación de la primera entrega.
+En la última revisión de integración se ejecutaron **43 pruebas**, con los siguientes resultados:
 
-## 9. Documentación
+- **Pruebas correctas:** 43.
+- **Pruebas fallidas:** 0.
 
-El proyecto incluye:
+Los casos comprueban resultados esperados, restricciones y distintas situaciones límite.
 
-- Código fuente de las tres funcionalidades.
-- Menú principal de consola.
-- Clases de pruebas automatizadas.
-- Documento de casos de prueba.
-- Capturas de los resultados de ejecución.
-- Informe parcial correspondiente a la primera entrega.
+Estos resultados corresponden a la revisión realizada y deben verificarse nuevamente después de modificar el código.
 
-## 10. Control de versiones
+---
 
-El desarrollo se realiza mediante Git y GitHub, utilizando un repositorio compartido.
+## Estrategias algorítmicas utilizadas
 
-Los cambios se registran mediante commits que permiten consultar la evolución del proyecto y los aportes realizados por los integrantes del grupo.
+**Divide y Vencerás:** permite dividir un problema en subproblemas más pequeños y combinar sus soluciones.
+
+**Greedy:** construye soluciones mediante decisiones locales convenientes.
+
+**Programación Dinámica:** resuelve problemas de optimización reutilizando resultados de subproblemas.
+
+**Backtracking:** explora combinaciones y retrocede cuando una alternativa no cumple las restricciones.
+
+---
+
+## Objetivos académicos
+
+- Aplicar diferentes estrategias de diseño de algoritmos.
+- Analizar la eficiencia y complejidad de las soluciones.
+- Utilizar estructuras de datos adecuadas.
+- Resolver problemas de optimización y búsqueda.
+- Implementar y ejecutar casos de prueba.
+- Integrar las funcionalidades en una aplicación Java.
+- Desarrollar una interfaz gráfica.
+- Trabajar colaborativamente mediante Git y GitHub.
+
+---
+
+## Estado del proyecto
+
+El proyecto **Red Social Universitaria** se encuentra finalizado, con las seis funcionalidades implementadas e integradas en una aplicación de escritorio desarrollada con Java Swing.
+
+El sistema incluye:
+
+- **Seis algoritmos implementados:** Merge Sort, Dijkstra, Mochila 0/1, Selección de Actividades, Formación de Equipos y Cadenas Alternativas de Difusión.
+- **Interfaz gráfica completa:** seis pestañas que permiten utilizar las distintas funcionalidades.
+- **Validaciones de entrada:** controles para detectar datos incorrectos y gestionar situaciones excepcionales.
+- **Pruebas automatizadas:** 43 casos ejecutados satisfactoriamente en la revisión de integración.
+- **Código organizado:** separación en paquetes de modelos, datos, algoritmos, interfaz y pruebas.
+- **Control de versiones:** desarrollo colaborativo mediante Git y GitHub.
+
+El proyecto integra los conocimientos de **Divide y Vencerás, Greedy, Programación Dinámica y Backtracking**, aplicados a problemas relacionados con la colaboración universitaria.
+
+**Estado: Desarrollo e integración completados.**
+
+---
+
+**Proyecto académico — Programación III**
+
+*Red Social Universitaria para la Colaboración entre Estudiantes.*
