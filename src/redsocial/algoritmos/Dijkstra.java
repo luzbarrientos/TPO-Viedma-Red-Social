@@ -32,9 +32,60 @@ public class Dijkstra {
         }
     }
 
+    // Verifica la estructura completa de la red.
+    private static void validarRed(Map<String, List<Vinculo>> red) {
+
+        if (red == null) {
+            throw new IllegalArgumentException("La red no puede ser null");
+        }
+
+        for (Map.Entry<String, List<Vinculo>> entrada : red.entrySet()) {
+
+            String usuario = entrada.getKey();
+            List<Vinculo> vinculos = entrada.getValue();
+
+            if (usuario == null || usuario.isBlank()) {
+                throw new IllegalArgumentException(
+                        "La red contiene un usuario invalido");
+            }
+
+            if (vinculos == null) {
+                throw new IllegalArgumentException(
+                        "La lista de vinculos de " + usuario + " es null");
+            }
+
+            for (Vinculo vinculo : vinculos) {
+
+                if (vinculo == null) {
+                    throw new IllegalArgumentException(
+                            "La red contiene un vinculo null");
+                }
+
+                if (!red.containsKey(vinculo.getDestino())) {
+                    throw new IllegalArgumentException(
+                            "El destino " + vinculo.getDestino()
+                                    + " no existe en la red");
+                }
+
+                if (vinculo.getMinutos() <= 0) {
+                    throw new IllegalArgumentException(
+                            "Los tiempos deben ser positivos");
+                }
+            }
+        }
+    }
+
     public static Resultado buscar(
             Map<String, List<Vinculo>> red,
             String origen, String destino) {
+
+        validarRed(red);
+
+        if (origen == null || destino == null
+                || origen.isBlank() || destino.isBlank()) {
+            throw new IllegalArgumentException(
+                    "El origen y destino deben ser validos");
+        }
 
         if (!red.containsKey(origen) || !red.containsKey(destino)) {
             throw new IllegalArgumentException(
@@ -72,9 +123,16 @@ public class Dijkstra {
             }
 
             for (Vinculo vinculo : red.get(actual.usuario)) {
+
                 String vecino = vinculo.getDestino();
-                long nuevoTiempo = actual.distancia
-                        + vinculo.getMinutos();
+                long minutos = vinculo.getMinutos();
+
+                // Evita desbordamientos al sumar distancias.
+                if (actual.distancia > Long.MAX_VALUE - minutos) {
+                    continue;
+                }
+
+                long nuevoTiempo = actual.distancia + minutos;
 
                 if (nuevoTiempo < distancias.get(vecino)) {
                     distancias.put(vecino, nuevoTiempo);
