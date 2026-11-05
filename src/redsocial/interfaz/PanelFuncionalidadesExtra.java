@@ -29,102 +29,148 @@ public class PanelFuncionalidadesExtra {
     // ==========================================
 
     public static JPanel actividades() {
+        List<Actividad> disponibles = new java.util.ArrayList<>(DatosActividades.crearActividades());
+        DefaultListModel<Actividad> modeloLista = new DefaultListModel<>();
+        JList<Actividad> lista = new JList<>(modeloLista);
+        lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        lista.setVisibleRowCount(6);
+        actualizarListaActividades(disponibles, modeloLista);
 
+        JTextField nombre = new JTextField(12);
+        JTextField inicio = new JTextField("09:00", 5);
+        JTextField fin = new JTextField("10:00", 5);
+        JSpinner interes = new JSpinner(new SpinnerNumberModel(5, 0, 100000, 1));
         JTextArea salida = new JTextArea(15, 50);
 
-        JPanel controles = new JPanel(
-                new FlowLayout(FlowLayout.LEFT, 10, 5)
-        );
+        JButton agregar = PanelFuncionalidades.crearBoton("Agregar");
+        JButton editar = PanelFuncionalidades.crearBoton("Editar seleccionada");
+        JButton eliminar = PanelFuncionalidades.crearBoton("Eliminar seleccionada");
+        JButton restaurar = PanelFuncionalidades.crearBoton("Restaurar ejemplos");
+        JButton calcular = PanelFuncionalidades.crearBoton("Calcular seleccion optima");
 
-        JButton boton = PanelFuncionalidades.crearBoton(
-                "Calcular seleccion optima"
-        );
+        JPanel campos = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 5));
+        campos.add(new JLabel("Nombre:"));
+        campos.add(nombre);
+        campos.add(new JLabel("Inicio HH:mm:"));
+        campos.add(inicio);
+        campos.add(new JLabel("Fin HH:mm:"));
+        campos.add(fin);
+        campos.add(new JLabel("Interes:"));
+        campos.add(interes);
 
-        controles.add(boton);
+        JPanel botones = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 5));
+        botones.add(agregar);
+        botones.add(editar);
+        botones.add(eliminar);
+        botones.add(restaurar);
+        botones.add(calcular);
 
-        List<Actividad> disponibles =
-                DatosActividades.crearActividades();
+        JPanel controles = new JPanel(new BorderLayout(0, 8));
+        controles.add(campos, BorderLayout.NORTH);
+        controles.add(new JScrollPane(lista), BorderLayout.CENTER);
+        controles.add(botones, BorderLayout.SOUTH);
+        controles.setPreferredSize(new Dimension(780, 225));
 
-        StringBuilder informacion = new StringBuilder();
+        salida.setText("Seleccione una actividad para editarla o eliminarla.\n"
+                + "Puede agregar actividades con horarios HH:mm.\n"
+                + "Luego presione 'Calcular seleccion optima'.");
 
-        informacion.append("ACTIVIDADES DISPONIBLES\n");
-        informacion.append("====================================\n\n");
+        lista.addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && lista.getSelectedValue() != null) {
+                Actividad seleccionada = lista.getSelectedValue();
+                nombre.setText(seleccionada.getNombre());
+                inicio.setText(formatearHora(seleccionada.getInicio()));
+                fin.setText(formatearHora(seleccionada.getFin()));
+                interes.setValue(seleccionada.getInteres());
+            }
+        });
 
-        for (Actividad actividad : disponibles) {
+        agregar.addActionListener(e -> PanelFuncionalidades.ejecutar(salida, () -> {
+            int siguienteId = disponibles.stream().mapToInt(Actividad::getId).max().orElse(0) + 1;
+            Actividad nueva = new Actividad(siguienteId, nombre.getText(),
+                    convertirHora(inicio.getText()), convertirHora(fin.getText()),
+                    (Integer) interes.getValue());
+            disponibles.add(nueva);
+            actualizarListaActividades(disponibles, modeloLista);
+            lista.setSelectedIndex(disponibles.size() - 1);
+            salida.setText("Actividad agregada: " + nueva.getNombre());
+        }));
 
-            informacion.append(actividad.getNombre())
-                    .append("\n")
-                    .append("Horario: ")
-                    .append(formatearHora(actividad.getInicio()))
-                    .append(" a ")
-                    .append(formatearHora(actividad.getFin()))
-                    .append("\n")
-                    .append("Interes: ")
-                    .append(actividad.getInteres())
-                    .append(" puntos\n\n");
+        editar.addActionListener(e -> PanelFuncionalidades.ejecutar(salida, () -> {
+            int indice = lista.getSelectedIndex();
+            if (indice < 0) {
+                throw new IllegalArgumentException("Seleccione una actividad para editar.");
+            }
+            Actividad anterior = disponibles.get(indice);
+            Actividad modificada = new Actividad(anterior.getId(), nombre.getText(),
+                    convertirHora(inicio.getText()), convertirHora(fin.getText()),
+                    (Integer) interes.getValue());
+            disponibles.set(indice, modificada);
+            actualizarListaActividades(disponibles, modeloLista);
+            lista.setSelectedIndex(indice);
+            salida.setText("Actividad modificada: " + modificada.getNombre());
+        }));
+
+        eliminar.addActionListener(e -> PanelFuncionalidades.ejecutar(salida, () -> {
+            int indice = lista.getSelectedIndex();
+            if (indice < 0) {
+                throw new IllegalArgumentException("Seleccione una actividad para eliminar.");
+            }
+            String eliminada = disponibles.remove(indice).getNombre();
+            actualizarListaActividades(disponibles, modeloLista);
+            salida.setText("Actividad eliminada: " + eliminada);
+        }));
+
+        restaurar.addActionListener(e -> {
+            disponibles.clear();
+            disponibles.addAll(DatosActividades.crearActividades());
+            actualizarListaActividades(disponibles, modeloLista);
+            salida.setText("Se restauraron las actividades de ejemplo.");
+        });
+
+        calcular.addActionListener(e -> PanelFuncionalidades.ejecutar(salida, () -> {
+            SeleccionActividades.Resultado resultado =
+                    SeleccionActividades.resolver(new java.util.ArrayList<>(disponibles));
+            StringBuilder texto = new StringBuilder("SELECCION OPTIMA DE ACTIVIDADES\n"
+                    + "====================================\n\n");
+            if (resultado.seleccionadas.isEmpty()) {
+                texto.append("No se seleccionaron actividades.\n");
+            }
+            for (Actividad actividad : resultado.seleccionadas) {
+                texto.append(actividad.getNombre()).append(" | ")
+                        .append(formatearHora(actividad.getInicio())).append(" - ")
+                        .append(formatearHora(actividad.getFin()))
+                        .append(" | Interes: ").append(actividad.getInteres()).append("\n");
+            }
+            texto.append("\nActividades seleccionadas: ").append(resultado.seleccionadas.size());
+            texto.append("\nInteres maximo: ").append(resultado.interesTotal);
+            salida.setText(texto.toString());
+        }));
+
+        return PanelFuncionalidades.crearPanel("Actividades",
+                "Seleccion mediante Programacion Dinamica", controles, salida);
+    }
+
+    private static void actualizarListaActividades(List<Actividad> actividades,
+                                                   DefaultListModel<Actividad> modelo) {
+        modelo.clear();
+        for (Actividad actividad : actividades) {
+            modelo.addElement(actividad);
         }
+    }
 
-        informacion.append("------------------------------------\n");
-        informacion.append("Algoritmo: Programacion Dinamica\n");
-        informacion.append("Objetivo: maximizar el interes total");
-        informacion.append(" sin superponer actividades.");
-
-        salida.setText(informacion.toString());
-
-        boton.addActionListener(e ->
-                PanelFuncionalidades.ejecutar(salida, () -> {
-
-                    SeleccionActividades.Resultado resultado =
-                            SeleccionActividades.resolver(
-                                    DatosActividades.crearActividades()
-                            );
-
-                    StringBuilder texto = new StringBuilder();
-
-                    texto.append("SELECCION OPTIMA DE ACTIVIDADES\n");
-                    texto.append("====================================\n\n");
-
-                    if (resultado.seleccionadas.isEmpty()) {
-                        texto.append(
-                                "No se seleccionaron actividades.\n\n"
-                        );
-                    }
-
-                    for (Actividad actividad : resultado.seleccionadas) {
-
-                        texto.append(actividad.getNombre())
-                                .append("\n")
-                                .append("Horario: ")
-                                .append(formatearHora(actividad.getInicio()))
-                                .append(" a ")
-                                .append(formatearHora(actividad.getFin()))
-                                .append("\n")
-                                .append("Interes: ")
-                                .append(actividad.getInteres())
-                                .append(" puntos\n\n");
-                    }
-
-                    texto.append("====================================\n");
-
-                    texto.append("ACTIVIDADES SELECCIONADAS: ")
-                            .append(resultado.seleccionadas.size());
-
-                    texto.append("\nINTERES MAXIMO: ")
-                            .append(resultado.interesTotal)
-                            .append(" puntos");
-
-                    texto.append("\n\nEstrategia: Programacion Dinamica");
-
-                    salida.setText(texto.toString());
-                })
-        );
-
-        return PanelFuncionalidades.crearPanel(
-                "Actividades",
-                "Seleccion mediante Programacion Dinamica",
-                controles,
-                salida
-        );
+    private static int convertirHora(String valor) {
+        if (valor == null || !valor.matches("\\d{2}:\\d{2}")) {
+            throw new IllegalArgumentException("Use el formato HH:mm, por ejemplo 09:30.");
+        }
+        String[] partes = valor.split(":");
+        int horas = Integer.parseInt(partes[0]);
+        int minutos = Integer.parseInt(partes[1]);
+        if (horas < 0 || horas > 24 || minutos < 0 || minutos > 59
+                || (horas == 24 && minutos != 0)) {
+            throw new IllegalArgumentException("La hora debe estar entre 00:00 y 24:00.");
+        }
+        return horas * 60 + minutos;
     }
 
     private static String formatearHora(int minutos) {
