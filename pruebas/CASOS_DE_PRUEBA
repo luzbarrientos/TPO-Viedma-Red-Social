@@ -202,3 +202,177 @@ los 18 casos definidos. No se detectaron fallas en estas
 pruebas. Esto no garantiza la ausencia de errores en otros
 escenarios, pero aporta evidencia del funcionamiento de
 las tres funcionalidades implementadas.
+
+---
+9. PRUEBAS DE SELECCION DE ACTIVIDADES (CP19 A CP26)
+---
+
+Algoritmo: Seleccion de actividades compatibles con interes maximo.
+Estrategia: Programacion Dinamica.
+Clase: PruebasSeleccionActividades.java.
+
+Datos de prueba:
+- ID 1: Taller Java, inicio 540, fin 660, interes 8.
+- ID 2: Taller Python, inicio 600, fin 720, interes 12.
+- ID 3: Charla IA, inicio 660, fin 780, interes 9.
+- ID 4: Taller Git, inicio 780, fin 840, interes 5.
+
+Los horarios se expresan en minutos.
+Dos actividades son compatibles cuando no se superponen.
+El objetivo es maximizar el interes total de las actividades seleccionadas.
+
+CP19 - Seleccion optima con datos de ejemplo.
+Esperado: actividades 1, 3 y 4; interes total 22.
+Obtenido: coincide con lo esperado
+Estado: CORRECTO
+
+CP20 - Lista vacia de actividades.
+Esperado: ninguna actividad seleccionada; interes total 0.
+Obtenido: coincide con lo esperado
+Estado: CORRECTO
+
+CP21 - Una sola actividad.
+Esperado: actividad 1; interes total 8.
+Obtenido: coincide con lo esperado
+Estado: CORRECTO
+
+CP22 - Actividades superpuestas.
+Esperado: actividad 2; interes total 12.
+Obtenido: coincide con lo esperado
+Estado: CORRECTO
+
+CP23 - Actividades consecutivas.
+Esperado: actividades 1 y 2; interes total 20.
+Obtenido: coincide con lo esperado
+Estado: CORRECTO
+
+CP24 - Combinacion optima frente a actividad individual.
+Esperado: actividades 2 y 3; interes total 20,
+superando el interes 15 de la actividad 1.
+Obtenido: coincide con lo esperado
+Estado: CORRECTO
+
+CP25 - Empate entre soluciones optimas.
+Esperado: dos actividades compatibles; interes total 20.
+Se acepta cualquier combinacion optima valida.
+Obtenido: coincide con lo esperado
+Estado: CORRECTO
+
+CP26 - Horario de actividad invalido
+Esperado: rechazo mediante IllegalArgumentException
+cuando el inicio es posterior al fin
+Obtenido: coincide con lo esperado
+Estado: CORRECTO
+
+Resumen Seleccion de Actividades: 8 correctas, 0 fallidas.
+
+Entorno: Visual Studio Code, JDK 17.
+Clase ejecutada: PruebasSeleccionActividades.java.
+
+TOTAL A3: 8 REALIZADAS, 8 CORRECTAS, 0 FALLIDAS.
+Porcentaje de casos aprobados: 100 %.
+
+Salida final observada en consola:
+Correctas: 8 | Fallidas: 0.
+
+---
+10. PRUEBAS DE FORMACION DE EQUIPOS (CP27 A CP34)
+---
+
+Algoritmo: Formacion de equipos con restricciones.
+Estrategia: Backtracking.
+Clase: PruebasFormacionEquipos.java.
+
+Datos de prueba:
+- Se utiliza la lista de estudiantes de DatosEquipos.
+- Tamaño requerido: 3 integrantes por equipo.
+- Habilidades requeridas: Java y Testing.
+- Integrante obligatorio: Ana (ID 1).
+- Parejas incompatibles: IDs 2 y 4; IDs 3 y 5.
+
+El algoritmo debe encontrar todos los equipos que cumplan
+simultaneamente las restricciones establecidas.
+No deben generarse equipos repetidos.
+
+CP27 - Formacion de equipos con datos de ejemplo.
+Esperado: 4 equipos validos, con IDs:
+1-2-3, 1-2-5, 1-3-4 y 1-4-5.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP28 - Verificacion del tamaño del equipo.
+Esperado: todos los equipos tienen exactamente 3 integrantes.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP29 - Verificacion de habilidades requeridas.
+Esperado: todos los equipos cubren las habilidades Java y Testing.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP30 - Verificacion de integrantes obligatorios.
+Esperado: Ana (ID 1) aparece en todos los equipos.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP31 - Verificacion de incompatibilidades.
+Esperado: los integrantes 2 y 4 nunca aparecen juntos;
+los integrantes 3 y 5 tampoco aparecen juntos.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP32 - Restricciones imposibles.
+Entrada: equipo de tamaño 2 con integrantes obligatorios
+1, 2 y 3.
+Esperado: lista vacia, sin equipos validos.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP33 - Verificacion de equipos repetidos.
+Esperado: cada combinacion de integrantes aparece una sola vez.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP34 - Tamaño de equipo invalido.
+Entrada: tamaño de equipo igual a 0.
+Esperado: rechazo mediante IllegalArgumentException.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+Resumen Formacion de Equipos: 8 correctas, 0 fallidas.
+
+---
+11. RESULTADOS DE PRUEBAS B1
+---
+
+Entorno: Visual Studio Code, JDK 17.
+Clase ejecutada: PruebasFormacionEquipos.java.
+
+Formacion de Equipos: 8 realizadas, 8 correctas, 0 fallidas.
+
+TOTAL B1: 8 REALIZADAS, 8 CORRECTAS, 0 FALLIDAS.
+Porcentaje de casos aprobados: 100 %.
+
+Salida final observada en consola:
+
+Correctas: 8
+Fallidas: 0
+
+---
+12. EVIDENCIAS B1
+---
+
+Evidencia_Pruebas_B1.png:
+Captura de la terminal de Visual Studio Code con la
+ejecucion de los casos CP27 a CP34 y el resumen de resultados.
+
+---
+13. CONCLUSION B1
+---
+
+Las ocho comprobaciones de formacion de equipos mediante
+Backtracking finalizaron correctamente.
+
+Se verifico la generacion de equipos validos, el cumplimiento
+del tamaño requerido, la cobertura de habilidades, la presencia
+de integrantes obligatorios y el respeto de incompatibilidades.
+
+Tambien se comprobaron restricciones imposibles, ausencia
+de equipos duplicados y rechazo de tamaños invalidos.
+
+Los resultados observados coinciden con los esperados en
+los ocho casos definidos. No se detectaron fallas durante
+estas pruebas. Esto no garantiza la ausencia de errores
+en otros escenarios.
