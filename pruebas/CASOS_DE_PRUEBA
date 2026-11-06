@@ -1,18 +1,21 @@
 CASOS DE PRUEBA - TPO PROGRAMACION III
 Proyecto: Red Social Universitaria para la Colaboracion
-Etapa: Primera entrega
+Etapa: Entrega final (primera y segunda etapa)
 Lenguaje: Java 21 (Temurin)
 Entorno: IntelliJ IDEA
-Resultado general: 18 pruebas correctas, 0 fallidas.
+Resultado general: 43 pruebas correctas, 0 fallidas.
 
 ---
 1. OBJETIVO
 ---
-Verificar las tres funcionalidades de la primera entrega:
+Verificar las seis funcionalidades implementadas:
 - Merge Sort: ordenamiento de publicaciones por fecha o relevancia.
 - Dijkstra: busqueda de la cadena de difusion de menor tiempo.
 - Mochila 0/1: seleccion de iniciativas con maximo impacto
   sin superar el presupuesto.
+- Seleccion de actividades: maximizar interes sin superponer horarios.
+- Formacion de equipos: respetar habilidades, obligatorios e incompatibilidades.
+- Cadenas alternativas: encontrar rutas de difusion validas.
 
 Las pruebas contemplan situaciones normales, empates,
 casos limite y entradas invalidas.
@@ -24,8 +27,11 @@ Las pruebas se implementaron en el paquete redsocial.pruebas:
 - PruebasMergeSort.java: 6 casos.
 - PruebasMochila.java: 6 casos.
 - PruebasDijkstra.java: 6 casos.
+- PruebasSeleccionActividades.java: 8 casos.
+- PruebasFormacionEquipos.java: 8 casos.
+- PruebasCadenasDifusion.java: 9 casos.
 
-EjecutarPruebas.java ejecuta las 18 pruebas juntas.
+EjecutarPruebas.java ejecuta las 43 pruebas juntas.
 Cada caso compara el resultado del algoritmo con el esperado.
 [OK] significa que la comprobacion paso.
 [ERROR] significa que la comprobacion fallo.
@@ -376,3 +382,131 @@ Los resultados observados coinciden con los esperados en
 los ocho casos definidos. No se detectaron fallas durante
 estas pruebas. Esto no garantiza la ausencia de errores
 en otros escenarios.
+
+
+---
+14. PRUEBAS DE CADENAS ALTERNATIVAS (CP35 A CP43)
+---
+
+Algoritmo: Cadenas alternativas de difusion.
+Estrategia: Backtracking.
+Clase: PruebasCadenasDifusion.java.
+
+Datos de prueba:
+- Red de usuarios definida en DatosDifusion.java.
+- Origen: Ana. Destino: Eva.
+- Tiempo maximo inicial: 16 minutos.
+- Maximo inicial de intermediarios: 3.
+- Usuarios excluidos inicialmente: ninguno.
+
+El algoritmo encuentra cadenas validas sin repetir usuarios,
+respetando los limites, e identifica la cadena mas rapida.
+
+CP35 - Todas las cadenas esperadas.
+Esperado: exactamente 3 cadenas:
+- Ana -> Beto -> Dani -> Eva: 12 minutos.
+- Ana -> Caro -> Beto -> Dani -> Eva: 11 minutos.
+- Ana -> Caro -> Dani -> Eva: 15 minutos.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP36 - Cadena mas rapida.
+Esperado: Ana -> Caro -> Beto -> Dani -> Eva, 11 minutos.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP37 - Limite de tiempo.
+Entrada: tiempo maximo de 12 minutos.
+Esperado: exactamente 2 cadenas, ambas de 12 minutos o menos.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP38 - Limite de intermediarios.
+Entrada: maximo de 2 intermediarios.
+Esperado: exactamente 2 cadenas; ninguna supera el limite.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP39 - Usuarios excluidos.
+Entrada: usuario Caro excluido.
+Esperado: unica cadena Ana -> Beto -> Dani -> Eva.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP40 - Sin solucion.
+Entrada: tiempo maximo de 10 minutos.
+Esperado: lista de cadenas vacia y cadena mas rapida nula.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP41 - Sin usuarios repetidos.
+Entrada: se agrega un vinculo de Beto hacia Ana que forma un ciclo.
+Esperado: exactamente 3 cadenas; ninguna repite usuarios.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP42 - Origen igual a destino.
+Entrada: origen Ana, destino Ana, tiempo maximo 0,
+intermediarios maximos 0.
+Esperado: una unica cadena [Ana], con tiempo total 0.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+CP43 - Datos invalidos.
+Entrada: tiempo maximo -1.
+Esperado: rechazo mediante IllegalArgumentException.
+Obtenido: coincide con lo esperado. Estado: CORRECTO.
+
+Resumen Cadenas Alternativas: 9 correctas, 0 fallidas.
+
+---
+15. RESULTADOS DE PRUEBAS B3
+---
+
+Clase ejecutada: PruebasCadenasDifusion.java.
+Ejecutor general: EjecutarPruebas.java.
+
+TOTAL B3: 9 REALIZADAS, 9 CORRECTAS, 0 FALLIDAS.
+Porcentaje de casos aprobados: 100 %.
+
+Salida final observada en consola:
+Correctas: 9
+Fallidas: 0
+
+---
+16. EVIDENCIAS DE LA ENTREGA FINAL
+---
+
+Capturas almacenadas en la carpeta pruebas:
+- resultado_pruebas_1.jpeg
+- resultado_pruebas_2.jpeg
+- resultado_pruebas_3.png
+- resultado_pruebas_4.png
+
+Las capturas muestran los resultados de la ejecucion de
+los casos de prueba y el resumen general de la consola.
+
+---
+17. CONCLUSION B3
+---
+
+Las nueve comprobaciones de cadenas alternativas mediante
+Backtracking finalizaron correctamente.
+
+Se verificaron las cadenas esperadas, la cadena mas rapida,
+los limites de tiempo e intermediarios, los usuarios excluidos,
+la ausencia de soluciones, la prevencion de ciclos, el caso
+origen igual a destino y el rechazo de un limite negativo.
+
+Los resultados coincidieron con los esperados en los nueve
+casos. No se detectaron fallas durante estas pruebas.
+
+---
+18. CONCLUSION GENERAL DE LA ENTREGA FINAL
+---
+
+Se ejecutaron 43 casos de prueba de las seis funcionalidades:
+- Merge Sort: 6 correctas.
+- Mochila 0/1: 6 correctas.
+- Dijkstra: 6 correctas.
+- Seleccion de Actividades: 8 correctas.
+- Formacion de Equipos: 8 correctas.
+- Cadenas Alternativas: 9 correctas.
+
+TOTAL: 43 PRUEBAS REALIZADAS, 43 CORRECTAS, 0 FALLIDAS.
+
+Las pruebas verifican los resultados esperados en los
+escenarios definidos, pero no garantizan la ausencia de
+errores en cualquier entrada posible.
