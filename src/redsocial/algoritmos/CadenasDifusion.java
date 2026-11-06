@@ -10,7 +10,6 @@ import java.util.Set;
 
 public class CadenasDifusion {
 
-    // Representa una cadena valida de difusion.
     public static class Cadena {
 
         public final List<String> usuarios;
@@ -22,7 +21,6 @@ public class CadenasDifusion {
         }
     }
 
-    // Resultado general del algoritmo.
     public static class Resultado {
 
         public final List<Cadena> cadenas;
@@ -34,7 +32,6 @@ public class CadenasDifusion {
         }
     }
 
-    // Valida que la red de contactos este correctamente construida.
     private static void validarRed(Map<String, List<Vinculo>> red) {
 
         if (red == null) {
@@ -84,7 +81,6 @@ public class CadenasDifusion {
         }
     }
 
-    // Busca todas las cadenas validas mediante Backtracking.
     public static Resultado resolver(
             Map<String, List<Vinculo>> red,
             String origen,
@@ -101,7 +97,6 @@ public class CadenasDifusion {
             );
         }
 
-        // Validacion completa de la red.
         validarRed(red);
 
         if (origen.isBlank() || destino.isBlank()) {
@@ -159,7 +154,6 @@ public class CadenasDifusion {
         return new Resultado(cadenasValidas, masRapida);
     }
 
-    // Explora recursivamente las posibles cadenas de difusion.
     private static void backtracking(
             Map<String, List<Vinculo>> red,
             String actual,
@@ -173,7 +167,6 @@ public class CadenasDifusion {
             List<Cadena> cadenasValidas
     ) {
 
-        // Caso base: se alcanzo el destino.
         if (actual.equals(destino)) {
             cadenasValidas.add(
                     new Cadena(caminoActual, tiempoActual)
@@ -181,7 +174,6 @@ public class CadenasDifusion {
             return;
         }
 
-        // Cantidad de intermediarios utilizados hasta ahora.
         int intermediariosActuales = caminoActual.size() - 1;
 
         List<Vinculo> vecinos = red.get(actual);
@@ -195,7 +187,6 @@ public class CadenasDifusion {
             String siguiente = vinculo.getDestino();
             int minutos = vinculo.getMinutos();
 
-            // No repetir usuarios en la misma cadena.
             if (visitados.contains(siguiente)) {
                 continue;
             }
@@ -205,27 +196,22 @@ public class CadenasDifusion {
                 continue;
             }
 
-            // El usuario debe existir en la red.
             if (!red.containsKey(siguiente)) {
                 continue;
             }
 
-            // No superar el tiempo maximo permitido.
             if (minutos > tiempoMaximo - tiempoActual) {
                 continue;
             }
 
-            // No superar la cantidad maxima de intermediarios.
             if (!siguiente.equals(destino)
                     && intermediariosActuales >= maximoIntermediarios) {
                 continue;
             }
 
-            // Elegir al siguiente usuario.
             caminoActual.add(siguiente);
             visitados.add(siguiente);
 
-            // Explorar recursivamente esta alternativa.
             backtracking(
                     red,
                     siguiente,
@@ -239,7 +225,6 @@ public class CadenasDifusion {
                     cadenasValidas
             );
 
-            // Backtracking: deshacer la ultima decision.
             visitados.remove(siguiente);
             caminoActual.remove(caminoActual.size() - 1);
         }
