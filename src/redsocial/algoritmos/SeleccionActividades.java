@@ -9,7 +9,6 @@ import java.util.List;
 
 public class SeleccionActividades {
 
-    // Resultado de la seleccion de actividades.
     public static class Resultado {
 
         public final List<Actividad> seleccionadas;
@@ -29,10 +28,8 @@ public class SeleccionActividades {
             );
         }
 
-        // Copiamos la lista para no modificar la original.
         List<Actividad> ordenadas = new ArrayList<>(actividades);
 
-        // Ordenamos por horario de finalizacion.
         ordenadas.sort(
                 Comparator.comparingInt(Actividad::getFin)
                         .thenComparingInt(Actividad::getInicio)
@@ -53,8 +50,6 @@ public class SeleccionActividades {
             p[i] = buscarCompatible(ordenadas, i);
         }
 
-        // dp[i] representa el maximo interes usando
-        // las primeras i actividades.
         int[] dp = new int[n + 1];
 
         dp[0] = 0;
@@ -69,7 +64,6 @@ public class SeleccionActividades {
             dp[i] = Math.max(incluir, excluir);
         }
 
-        // Reconstruimos las actividades seleccionadas.
         List<Actividad> seleccionadas = new ArrayList<>();
 
         int i = n;
@@ -92,8 +86,6 @@ public class SeleccionActividades {
         return new Resultado(seleccionadas, dp[n]);
     }
 
-    // Busca mediante busqueda binaria la ultima actividad
-    // compatible con la actividad en posicion indice.
     private static int buscarCompatible(
             List<Actividad> actividades,
             int indice
