@@ -49,7 +49,7 @@ public class PruebasMochila {
         correctas = 0;
         fallidas = 0;
 
-        System.out.println("\n- PRUEBAS MOCHILA -");
+        System.out.println("\n| PRUEBAS MOCHILA |");
 
         List<Iniciativa> iniciativas = Arrays.asList(
                 new Iniciativa(1, 4, 7),
@@ -103,7 +103,7 @@ public class PruebasMochila {
             rechazoNegativo = true;
         }
 
-        verificar("CP12 - Presupuesto negativo rechazado",
+        verificar("CP12 | Presupuesto negativo rechazado",
                 rechazoNegativo);
 
         System.out.println("Correctas: " + correctas

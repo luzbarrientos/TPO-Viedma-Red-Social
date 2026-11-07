@@ -95,8 +95,7 @@ public class PanelFuncionalidades {
     }
 
     // Diseño compartido de los seis botones.
-    // Se dibuja manualmente para evitar problemas
-    // con los colores del estilo de Windows.
+
     public static JButton crearBoton(String texto) {
 
         JButton boton = new JButton(texto) {
@@ -153,9 +152,9 @@ public class PanelFuncionalidades {
         return boton;
     }
 
-    // ==========================================
-    // 1. PUBLICACIONES - MERGE SORT
-    // ==========================================
+
+    //| 1. PUBLICACIONES - MERGE SORT |
+
 
     public static JPanel publicaciones() {
 
@@ -186,7 +185,7 @@ public class PanelFuncionalidades {
         StringBuilder inicial = new StringBuilder();
 
         inicial.append("PUBLICACIONES DISPONIBLES\n");
-        inicial.append("====================================\n\n");
+        inicial.append("------------------------------------\n\n");
 
         for (Publicacion publicacion : disponibles) {
             inicial.append(publicacion).append("\n\n");
@@ -218,7 +217,7 @@ public class PanelFuncionalidades {
                     StringBuilder texto = new StringBuilder();
 
                     texto.append("PUBLICACIONES ORDENADAS\n");
-                    texto.append("====================================\n\n");
+                    texto.append("-------------------------------\n\n");
 
                     if (criterio.getSelectedIndex() == 0) {
                         texto.append(
@@ -242,7 +241,7 @@ public class PanelFuncionalidades {
                                 .append("\n\n");
                     }
 
-                    texto.append("====================================\n");
+                    texto.append("----------------------------------\n");
 
                     texto.append("TOTAL DE PUBLICACIONES: ")
                             .append(ordenadas.length);
@@ -262,9 +261,9 @@ public class PanelFuncionalidades {
         );
     }
 
-    // ==========================================
-    // 2. CONTACTOS - DIJKSTRA
-    // ==========================================
+    //
+    // | 2. CONTACTOS - DIJKSTRA |
+    //
 
     public static JPanel contactos() {
 
@@ -300,7 +299,7 @@ public class PanelFuncionalidades {
 
         salida.setText(
                 "RED DE CONTACTOS UNIVERSITARIA\n"
-                        + "====================================\n\n"
+                        + "-------------------------------------\n\n"
                         + "Usuarios disponibles:\n\n"
                         + "- Ana\n"
                         + "- Beto\n"
@@ -333,7 +332,7 @@ public class PanelFuncionalidades {
                     StringBuilder texto = new StringBuilder();
 
                     texto.append("RESULTADO DE DIFUSION\n");
-                    texto.append("====================================\n\n");
+                    texto.append("----------------------------------\n\n");
 
                     texto.append("Origen: ")
                             .append(usuarioOrigen)
@@ -369,7 +368,7 @@ public class PanelFuncionalidades {
                                 .append(resultado.camino.size());
                     }
 
-                    texto.append("\n\n====================================");
+                    texto.append("\n\n---------------------------------");
                     texto.append("\nAlgoritmo: Dijkstra");
                     texto.append("\nEstrategia: Greedy");
 
@@ -385,9 +384,9 @@ public class PanelFuncionalidades {
         );
     }
 
-    // ==========================================
-    // 3. INICIATIVAS - MOCHILA 0/1
-    // ==========================================
+    //
+    // | 3. INICIATIVAS - MOCHILA 0/1 |
+    //
 
     public static JPanel iniciativas() {
 
@@ -412,7 +411,7 @@ public class PanelFuncionalidades {
         StringBuilder inicial = new StringBuilder();
 
         inicial.append("INICIATIVAS DISPONIBLES\n");
-        inicial.append("====================================\n\n");
+        inicial.append("--------------------------------------\n\n");
 
         for (Iniciativa iniciativa : DatosEjemplo.iniciativas()) {
 
@@ -446,7 +445,7 @@ public class PanelFuncionalidades {
                     StringBuilder texto = new StringBuilder();
 
                     texto.append("SELECCION OPTIMA DE INICIATIVAS\n");
-                    texto.append("====================================\n\n");
+                    texto.append("----------------------------------------\n\n");
 
                     texto.append("Presupuesto disponible: ")
                             .append(presupuestoDisponible)
@@ -472,7 +471,7 @@ public class PanelFuncionalidades {
                                 .append("\n\n");
                     }
 
-                    texto.append("====================================\n");
+                    texto.append("----------------------------------------\n");
 
                     texto.append("CANTIDAD SELECCIONADA: ")
                             .append(resultado.seleccionadas.size());

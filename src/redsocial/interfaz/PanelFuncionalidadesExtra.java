@@ -24,9 +24,9 @@ public class PanelFuncionalidadesExtra {
     private PanelFuncionalidadesExtra() {
     }
 
-    // ==========================================
-    // 4. ACTIVIDADES - PROGRAMACION DINAMICA
-    // ==========================================
+    //
+    // | 4. ACTIVIDADES - PROGRAMACION DINAMICA |
+    //
 
     public static JPanel actividades() {
         List<Actividad> disponibles = new java.util.ArrayList<>(DatosActividades.crearActividades());
@@ -185,9 +185,9 @@ public class PanelFuncionalidadesExtra {
         );
     }
 
-    // ==========================================
-    // 5. FORMACION DE EQUIPOS - BACKTRACKING
-    // ==========================================
+    //
+    // | 5. FORMACION DE EQUIPOS - BACKTRACKING |
+    //
 
     public static JPanel equipos() {
 
@@ -269,7 +269,7 @@ public class PanelFuncionalidadesExtra {
         StringBuilder inicial = new StringBuilder();
 
         inicial.append("ESTUDIANTES DISPONIBLES\n");
-        inicial.append("====================================\n\n");
+        inicial.append("------------------------------------\n\n");
 
         for (Estudiante estudiante : estudiantes) {
 
@@ -284,7 +284,7 @@ public class PanelFuncionalidadesExtra {
                     .append("\n\n");
         }
 
-        inicial.append("====================================\n");
+        inicial.append("-------------------------------------\n");
         inicial.append("RESTRICCIONES INICIALES\n\n");
 
         inicial.append("Tamaño del equipo: ")
@@ -445,7 +445,7 @@ public class PanelFuncionalidadesExtra {
                     StringBuilder texto = new StringBuilder();
 
                     texto.append("RESULTADO DE FORMACION DE EQUIPOS\n");
-                    texto.append("====================================\n\n");
+                    texto.append("--------------------------------------\n\n");
 
                     texto.append("RESTRICCIONES UTILIZADAS\n\n");
 
@@ -465,7 +465,7 @@ public class PanelFuncionalidadesExtra {
                             .append(paresIncompatibles)
                             .append("\n\n");
 
-                    texto.append("====================================\n");
+                    texto.append("----------------------------------\n");
                     texto.append("EQUIPOS VALIDOS\n\n");
 
                     int numero = 1;
@@ -486,7 +486,7 @@ public class PanelFuncionalidadesExtra {
                         texto.append("\n");
                     }
 
-                    texto.append("====================================\n");
+                    texto.append("----------------------------------------\n");
 
                     texto.append("TOTAL DE EQUIPOS VALIDOS: ")
                             .append(equipos.size());
@@ -512,9 +512,9 @@ public class PanelFuncionalidadesExtra {
         );
     }
 
-    // ==========================================
-    // 6. CADENAS ALTERNATIVAS - BACKTRACKING
-    // ==========================================
+    //
+    // | 6. CADENAS ALTERNATIVAS - BACKTRACKING |
+    //
 
     public static JPanel difusion() {
 
@@ -586,7 +586,7 @@ public class PanelFuncionalidadesExtra {
 
         salida.setText(
                 "CADENAS ALTERNATIVAS DE DIFUSION\n"
-                        + "====================================\n\n"
+                        + "----------------------------------------\n\n"
                         + "Selecciona un origen y un destino.\n\n"
                         + "Restricciones disponibles:\n"
                         + "- Tiempo maximo de difusion.\n"
@@ -633,7 +633,7 @@ public class PanelFuncionalidadesExtra {
                     StringBuilder texto = new StringBuilder();
 
                     texto.append("CADENAS VALIDAS\n");
-                    texto.append("====================================\n\n");
+                    texto.append("-------------------------------------\n\n");
 
                     texto.append("Origen: ")
                             .append(origen.getSelectedItem())
@@ -672,7 +672,7 @@ public class PanelFuncionalidadesExtra {
                                 .append(" minutos\n\n");
                     }
 
-                    texto.append("====================================\n");
+                    texto.append("----------------------------------------\n");
 
                     texto.append("TOTAL DE CADENAS: ")
                             .append(resultado.cadenas.size());

@@ -15,7 +15,7 @@ public class PruebasCadenasDifusion {
         correctas = 0;
         fallidas = 0;
 
-        System.out.println("\n=== PRUEBAS B3: CADENAS ALTERNATIVAS ===");
+        System.out.println("\n | PRUEBAS B3: CADENAS ALTERNATIVAS |");
 
         probarCadenasEsperadas();
         probarCadenaMasRapida();

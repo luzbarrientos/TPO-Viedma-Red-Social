@@ -26,9 +26,9 @@ public class EjecutarPruebas {
                 PruebasCadenasDifusion.ejecutar();
 
         // RESUMEN GENERAL
-        System.out.println("\n================================");
+        System.out.println("\n----");
         System.out.println("       RESUMEN GENERAL");
-        System.out.println("================================");
+        System.out.println("----");
 
         System.out.println("Merge Sort: "
                 + (mergeSort ? "CORRECTO" : "FALLIDO"));
@@ -56,7 +56,7 @@ public class EjecutarPruebas {
                         equipos &&
                         cadenas;
 
-        System.out.println("\n================================");
+        System.out.println("\n----------------------------------");
 
         if (todasCorrectas) {
             System.out.println("RESULTADO: 43/43 PRUEBAS CORRECTAS");
@@ -66,6 +66,6 @@ public class EjecutarPruebas {
             System.out.println("REVISAR LOS RESULTADOS ANTERIORES");
         }
 
-        System.out.println("================================");
+        System.out.println("-------------------------------------");
     }
 }

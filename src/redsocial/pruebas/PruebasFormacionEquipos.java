@@ -18,7 +18,7 @@ public class PruebasFormacionEquipos {
         correctas = 0;
         fallidas = 0;
 
-        System.out.println("\n=== PRUEBAS B1: FORMACION DE EQUIPOS ===");
+        System.out.println("\n| PRUEBAS B1: FORMACION DE EQUIPOS |");
 
         probarDatosEjemplo();
         probarTamanioEquipo();

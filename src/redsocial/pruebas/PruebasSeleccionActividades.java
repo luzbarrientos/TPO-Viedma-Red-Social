@@ -59,7 +59,7 @@ public class PruebasSeleccionActividades {
     public static boolean ejecutar() {
         correctas = 0;
         fallidas = 0;
-        System.out.println("\n--- PRUEBAS SELECCION DE ACTIVIDADES ---");
+        System.out.println("\n| PRUEBAS SELECCION DE ACTIVIDADES |");
 
         List<Actividad> ejemplo = DatosActividades.crearActividades();
         SeleccionActividades.Resultado r19 = SeleccionActividades.resolver(ejemplo);
