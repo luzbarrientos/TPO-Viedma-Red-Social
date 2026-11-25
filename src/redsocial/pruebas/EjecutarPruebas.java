@@ -1,4 +1,3 @@
-
 package redsocial.pruebas;
 
 public class EjecutarPruebas {
@@ -7,7 +6,7 @@ public class EjecutarPruebas {
 
         System.out.println("================================");
         System.out.println("     TPO PROGRAMACION III");
-        System.out.println("  PRUEBAS DE LAS DOS ETAPAS");
+        System.out.println("  PRUEBAS DE LAS DOS ETAPAS Y FINAL");
         System.out.println("================================");
 
         // PRIMERA ETAPA
@@ -24,6 +23,10 @@ public class EjecutarPruebas {
 
         boolean cadenas =
                 PruebasCadenasDifusion.ejecutar();
+
+        // FUNCIONALIDAD ADICIONAL A2
+        boolean tutores =
+                PruebasAsignacionTutores.ejecutar();
 
         // RESUMEN GENERAL
         System.out.println("\n----");
@@ -48,18 +51,22 @@ public class EjecutarPruebas {
         System.out.println("Cadenas alternativas: "
                 + (cadenas ? "CORRECTO" : "FALLIDO"));
 
+        System.out.println("Asignacion de tutores: "
+                + (tutores ? "CORRECTO" : "FALLIDO"));
+
         boolean todasCorrectas =
                 mergeSort &&
                         dijkstra &&
                         mochila &&
                         actividades &&
                         equipos &&
-                        cadenas;
+                        cadenas &&
+                        tutores;
 
         System.out.println("\n----------------------------------");
 
         if (todasCorrectas) {
-            System.out.println("RESULTADO: 43/43 PRUEBAS CORRECTAS");
+            System.out.println("RESULTADO: 49/49 PRUEBAS CORRECTAS");
             System.out.println("TODAS LAS FUNCIONALIDADES APROBADAS");
         } else {
             System.out.println("RESULTADO: HAY PRUEBAS FALLIDAS");
