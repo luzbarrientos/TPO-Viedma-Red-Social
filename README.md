@@ -241,3 +241,99 @@ El proyecto integra los conocimientos de **Divide y Vencerás, Greedy, Programac
 **Proyecto académico — Programación III**
 
 *Red Social Universitaria para la Colaboración entre Estudiantes.*
+
+
+---
+
+## Funcionalidad adicional - Final adelantado
+
+### A2. Asignación de tutores a grupos
+
+Se implementó la alternativa A2 de la consigna original
+del trabajo práctico.
+
+### Objetivo
+
+Encontrar la asignación de tutores a grupos que minimice
+el costo total, respetando las restricciones establecidas.
+
+### Restricciones
+
+- Igual cantidad de tutores y grupos.
+- Máximo de diez tutores y diez grupos.
+- Cada grupo debe recibir exactamente un tutor.
+- Cada tutor puede atender un único grupo.
+- Se deben respetar las asignaciones prohibidas.
+- Los costos permitidos son enteros no negativos.
+- El valor -1 representa una asignación prohibida.
+
+### Estrategia algorítmica
+
+Backtracking con podas.
+
+El algoritmo explora recursivamente las posibles
+asignaciones de tutores a grupos.
+
+Se descartan las asignaciones prohibidas y los tutores
+que ya fueron utilizados.
+
+También se aplica una poda por costo acumulado cuando
+una solución parcial no puede mejorar el menor costo
+encontrado hasta el momento.
+
+### Complejidad temporal y espacial
+
+- Temporal: O(n!) en el peor caso, considerando las
+  posibles asignaciones.
+- Espacial auxiliar: O(n), por los arreglos utilizados
+  y la profundidad de la recursividad.
+- La matriz de costos ocupa O(n²).
+
+### Interfaz gráfica
+
+Se incorporó una séptima pestaña denominada "Tutores".
+
+La interfaz permite:
+
+- Modificar los costos de asignación.
+- Prohibir asignaciones ingresando -1.
+- Ejecutar el algoritmo mediante un botón.
+- Visualizar la asignación óptima.
+- Consultar el costo mínimo total.
+- Informar cuando no existe una asignación válida.
+
+La interfaz utiliza tres tutores y tres grupos como
+ejemplo, aunque el algoritmo admite hasta diez.
+
+### Archivos incorporados
+
+- AsignacionTutores.java
+- DatosTutores.java
+- PanelAsignacionTutores.java
+- PruebasAsignacionTutores.java
+
+### Archivos modificados
+
+- VentanaPrincipal.java
+- EjecutarPruebas.java
+- README.md
+
+### Casos de prueba
+
+| Caso | Descripción |
+|------|-------------|
+| CP44 | Asignación óptima |
+| CP45 | Costo mínimo correcto |
+| CP46 | Respeto de asignaciones prohibidas |
+| CP47 | Inexistencia de una asignación válida |
+| CP48 | Búsqueda de una solución mejor |
+| CP49 | Un único tutor y un único grupo |
+
+### Estado final del proyecto
+
+- 7 funcionalidades implementadas.
+- 7 pestañas en la interfaz gráfica.
+- 49 casos de prueba automatizados.
+
+
+
